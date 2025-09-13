@@ -4,3 +4,5 @@ dataBaseName: BetterStats # the database name inside MongoDB
 collectionName: players # collection for Minecraft players
 discordCollectionName: discord # collection for Discord links
 token: DiscordBotToken
+guildId: YourDiscordGuildId
+channelId: YourDiscordChannelId
