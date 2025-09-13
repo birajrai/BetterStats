@@ -1,8 +1,0 @@
-# MongoDB settings
-mongoURL: mongodb://localhost:27017
-dataBaseName: BetterStats # the database name inside MongoDB
-collectionName: players # collection for Minecraft players
-discordCollectionName: discord # collection for Discord links
-token: DiscordBotToken
-guildId: YourDiscordGuildId
-channelId: YourDiscordChannelId
