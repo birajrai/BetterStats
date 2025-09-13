@@ -15,6 +15,7 @@ import io.github.birajrai.betterstats.player.ServerPlayer;
 import io.github.birajrai.betterstats.server.ServerManager;
 import io.github.birajrai.betterstats.utils.Util;
 import io.github.birajrai.betterstats.stats.Stats;
+import java.util.logging.Logger;
 
 /**
  * Prints all current specified player stats
@@ -25,6 +26,7 @@ public class PlayerStatsCommand implements CommandExecutor {
 
 	private DataBaseManager mongoDB;
 	private ServerManager serverMan;
+	private static final Logger logger = Logger.getLogger(PlayerStatsCommand.class.getName());
 
 	public PlayerStatsCommand( DataBaseManager mongoDB, ServerManager serverMan) {
 		this.serverMan = serverMan;
@@ -85,6 +87,10 @@ public class PlayerStatsCommand implements CommandExecutor {
 															  	  .replace("<variable>", String.valueOf(Util.getStatVariable(pp, stat))));
 		}
 						
+		Object playerIdObj = playerDoc.get(Stats.PLAYERID.getQuery());
+        logger.info("Player ID object type: " + playerIdObj.getClass().getName());
+        UUID playerId = (UUID) playerIdObj;
+		
 		Document discUser = mongoDB.getDiscordUserByPlayer(playerId);
 		
 		if(discUser!=null) sender.sendMessage(Util.chat("    &a&lLink&7: &b&l<variable>").replace("<variable>", discUser.getString("userName")));
