@@ -333,7 +333,15 @@ public class DataBaseManager {
 	}
 	
 	public Document getDiscordUserByPlayer(UUID playerId) {
-		return getDiscordUser(getPlayer(playerId).getString("link"));
+		Document playerDoc = getPlayer(playerId);
+		if (playerDoc != null) {
+			String discordLink = playerDoc.getString("link");
+			log.info("Discord link from player document: " + discordLink);
+			return getDiscordUser(discordLink);
+		} else {
+			log.info("Player document not found for playerId: " + playerId);
+			return null;
+		}
 	}
 	
 	
