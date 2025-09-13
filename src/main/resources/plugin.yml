@@ -1,0 +1,8 @@
+name: BetterStats
+version: '1.0-SNAPSHOT'
+main: io.github.birajrai.betterstats.Main
+api-version: '1.21'
+prefix: [ cBans ]
+authors: [ Biraj Rai ]
+description: A Plugin
+website: yo
