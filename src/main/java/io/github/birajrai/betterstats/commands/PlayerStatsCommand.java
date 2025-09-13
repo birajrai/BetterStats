@@ -89,9 +89,8 @@ public class PlayerStatsCommand implements CommandExecutor {
 						
 		Object playerIdObj = playerDoc.get(Stats.PLAYERID.getQuery());
         logger.info("Player ID object type: " + playerIdObj.getClass().getName());
-        UUID playerId = (UUID) playerIdObj;
 		
-		Document discUser = mongoDB.getDiscordUserByPlayer(playerId);
+		Document discUser = mongoDB.getDiscordUserByPlayer((UUID) playerIdObj);
 		
 		if(discUser!=null) sender.sendMessage(Util.chat("    &a&lLink&7: &b&l<variable>").replace("<variable>", discUser.getString("userName")));
 		else sender.sendMessage(Util.chat("    &c&lLink&7: &b&l???"));
