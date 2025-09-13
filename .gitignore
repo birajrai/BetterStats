@@ -1,0 +1,6 @@
+/server/node_modules
+/dev
+/target/classes
+/target/test-classes
+/target/maven-status
+/target/generated-sources

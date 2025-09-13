@@ -4,5 +4,55 @@ main: io.github.birajrai.betterstats.Main
 api-version: '1.21'
 prefix: [ cBans ]
 authors: [ Biraj Rai ]
-description: A Plugin
+description: This plugin uploads to a dataBase the Stats of the players in a Minecraft Server.
 website: yo
+
+commands:
+  upload:
+    description: Uploads all the player stats to database.
+
+  uploadall:
+    aliases: [uploadAll]
+    description: Uploads all the stats from all the players.
+
+  download:
+    description: Downloads all the stats from a player in the cloud.
+
+  merge:
+    description: Merges two player documents from the data base.
+
+  givemedal:
+    aliases: [giveMedal]
+    description: Gives a Medal to a player.
+
+  updateall:
+    aliases: [updateAll]
+    description: Updates all documents from database.
+
+  medal:
+    aliases: [Medal, medalinfo, Medalinfo, medalInfo, MedalInfo]
+    description: Gives you some information about a medal.
+
+  medals:
+    aliases: [Medals, allmedals, allMedals]
+    description: Prints all medals :D.
+
+  playermedals:
+    aliases: [playerMedals, playermedal, playerMedal, pmedals, pm]
+    description: Shows you all the medals the a specyfied player have.
+
+  stats:
+    aliases: [playerstats, playerStats, PlayerStats, Playerstats, pstats]
+    description: Shows you all the current stats of the player.
+
+  tag:
+    aliases: [tg]
+    description: A list of tag commands :D.
+
+  link:
+    aliases: []
+    description: Link your minecraft account to your Discord account.
+
+  unlink:
+    aliases: []
+    description: Unlink your minecraft account with your Discord account.
