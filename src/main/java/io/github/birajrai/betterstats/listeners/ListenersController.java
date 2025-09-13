@@ -34,6 +34,16 @@ public class ListenersController {
 	@SuppressWarnings("deprecation")
 	public void playerJoin(Player player) {
 		
+		if(DiscordUtil.getJda().getGuildById(DiscordUtil.getGuildId()) == null) {
+			Main.currentServer.getLogger().warning("Discord bot is not in the guild with ID: " + DiscordUtil.getGuildId());
+			return;
+		}
+		
+		if(DiscordUtil.getJda().getTextChannelById(DiscordUtil.getChannelId()) == null) {
+			Main.currentServer.getLogger().warning("Discord bot is not in the channel with ID: " + DiscordUtil.getChannelId());
+			return;
+		}
+		
 		DiscordUtil.getJda().getGuildById(DiscordUtil.getGuildId())
 							.getTextChannelById(DiscordUtil.getChannelId())
 							.sendMessage("```fix\n"+ player.getName() +" joined the game.\n```").queue();
@@ -62,6 +72,16 @@ public class ListenersController {
 	}
 	
 	public void playerQuit(Player player) {
+		
+		if(DiscordUtil.getJda().getGuildById(DiscordUtil.getGuildId()) == null) {
+			Main.currentServer.getLogger().warning("Discord bot is not in the guild with ID: " + DiscordUtil.getGuildId());
+			return;
+		}
+		
+		if(DiscordUtil.getJda().getTextChannelById(DiscordUtil.getChannelId()) == null) {
+			Main.currentServer.getLogger().warning("Discord bot is not in the channel with ID: " + DiscordUtil.getChannelId());
+			return;
+		}
 		
 		DiscordUtil.getJda().getGuildById(DiscordUtil.getGuildId())
 				   .getTextChannelById(DiscordUtil.getChannelId())
@@ -118,6 +138,16 @@ public class ListenersController {
 	}
 	
 	public void die(Player player) {
+		
+		if(DiscordUtil.getJda().getGuildById(DiscordUtil.getGuildId()) == null) {
+			Main.currentServer.getLogger().warning("Discord bot is not in the guild with ID: " + DiscordUtil.getGuildId());
+			return;
+		}
+		
+		if(DiscordUtil.getJda().getTextChannelById(DiscordUtil.getChannelId()) == null) {
+			Main.currentServer.getLogger().warning("Discord bot is not in the channel with ID: " + DiscordUtil.getChannelId());
+			return;
+		}
 		
 		DiscordUtil.getJda().getGuildById(DiscordUtil.getGuildId())
 		.getTextChannelById(DiscordUtil.getChannelId())

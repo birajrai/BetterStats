@@ -81,7 +81,8 @@ public class Main extends JavaPlugin {
             currentServer = getServer();
             serverMan = new ServerManager(new DataBase(getConfig()), log, this);
             mongoDB = serverMan.getDataBaseManager();
-            linkMan = new LinkManager(mongoDB, serverMan);
+            DiscordLinkCommand discordLinkCommand = new DiscordLinkCommand(mongoDB, serverMan, linkMan);
+            linkMan = new LinkManager(mongoDB, serverMan, discordLinkCommand);
             controller = new ListenersController(mongoDB, serverMan);
 
             Thread initThread = new Thread(this::init, "[MineStats] - Initialization Discord Bot");

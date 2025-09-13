@@ -38,6 +38,7 @@ public class ServerPlayer extends PlayerProfile {
 		
 		TIME_DISCORD_LINK = mongoDB.getConfig().getInt("timeDiscordLink");
 		TIME_BETWEEN_SAVES = mongoDB.getConfig().getInt("timeBetweenSaves");
+		Main.getPlugin(Main.class).getLogger().info("TIME_BETWEEN_SAVES: " + TIME_BETWEEN_SAVES);
 		timer = new Timer();
 	}
 	

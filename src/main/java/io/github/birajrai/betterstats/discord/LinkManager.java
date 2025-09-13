@@ -11,9 +11,13 @@ import io.github.birajrai.betterstats.mongoDB.DataBaseManager;
 import io.github.birajrai.betterstats.server.ServerManager;
 import io.github.birajrai.betterstats.stats.Stats;
 import io.github.birajrai.betterstats.utils.DiscordUtil;
+import org.bukkit.Bukkit;
+import io.github.birajrai.betterstats.utils.Util;
 
 import com.mongodb.client.model.Filters;
 import com.mongodb.client.model.Updates;
+
+import io.github.birajrai.betterstats.commands.DiscordLinkCommand;
 
 import net.dv8tion.jda.api.entities.Guild;
 
@@ -23,17 +27,21 @@ import net.dv8tion.jda.api.entities.Guild;
  */
 public class LinkManager {
 	
-	private Map<Integer, UUID> playerLinkCodes;
 	private DataBaseManager mongoDB;
 	private ServerManager serverMan;
-	private final int RAND_RATIO = 10000;
-	private final String LINK = "link";
+	private DiscordLinkCommand discordLinkCommand;
 	
-	public LinkManager(DataBaseManager mongoDB, ServerManager serverMan) {
-		playerLinkCodes = new HashMap<>();
+	private HashMap<Integer, UUID> playerLinkCodes;
+	
+	public LinkManager(DataBaseManager mongoDB, ServerManager serverMan, DiscordLinkCommand discordLinkCommand) {
 		this.mongoDB = mongoDB;
 		this.serverMan = serverMan;
+		this.discordLinkCommand = discordLinkCommand;
+		this.playerLinkCodes = new HashMap<>();
 	}
+	
+	private final int RAND_RATIO = 10000;
+	private final String LINK = "link";
 	
 	public int generateNewCode(UUID playerId) {
 		
@@ -99,18 +107,23 @@ public class LinkManager {
 	}
 	
 	private void linkProcess(int code, String userId) {
-		
+
 		UUID playerId = getPlayer(code);
-		
+
 		mongoDB.updateOneServer(Filters.eq(Stats.PLAYERID.getQuery(), playerId), Updates.set(LINK, userId));
-		mongoDB.updateOneDiscord(Filters.eq("userId", userId), Updates.set(LINK, playerId));
-		
+		mongoDB.updateOneDiscord(Filters.eq("userId", userId), Updates.combine(Updates.set(LINK, playerId), Updates.set("userName", DiscordUtil.getUserById(userId).getName())));
+
 		playerLinkCodes.remove(code);
-		
+
+		discordLinkCommand.resetLinkTrys(playerId);
+
 		Guild guild = DiscordUtil.getJda().getGuildById(DiscordUtil.getGuildId());
-    	
+
     	guild.addRoleToMember(userId, guild.getRoleById(DiscordUtil.getRoleLinkedId())).complete();
 		
+		// Send in-game message to the player
+		Bukkit.getPlayer(playerId).sendMessage(Util.chat("&b[MineStats]&7 - Your Discord account has been successfully linked!"));
+
 	}
 	
 	

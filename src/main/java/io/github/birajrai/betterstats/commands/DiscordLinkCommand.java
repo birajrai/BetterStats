@@ -82,4 +82,8 @@ public class DiscordLinkCommand implements CommandExecutor {
 		return true;
 	}
 	
+	public void resetLinkTrys(UUID playerID) {
+		ServerPlayer pp = serverMan.getPlayerFromHashMap(playerID);
+		pp.setLinkTrys(0);
+	}
 }

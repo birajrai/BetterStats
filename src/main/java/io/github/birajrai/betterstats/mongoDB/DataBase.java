@@ -27,7 +27,8 @@ public class DataBase {
 	private final String CONNECTION = "mongoURL", 
 						 DATABASE_NAME = "dataBaseName",
 						 COLLECTION_NAME = "collectionName",
-						 DISCORD_DATABASE_NAME = "discordCollectionName";
+						 DISCORD_DATABASE_NAME = "discordCollectionName",
+						 TIME_BETWEEN_SAVES = "timeBetweenSaves";
 	
 	public DataBase(FileConfiguration config){
 		DataBase.config = config; 
@@ -35,6 +36,10 @@ public class DataBase {
 		database = client.getDatabase(config.getString(DATABASE_NAME));
 		discordCollection = database.getCollection(config.getString(DISCORD_DATABASE_NAME));
 		collection = database.getCollection(config.getString(COLLECTION_NAME));
+		
+		if (!config.contains(TIME_BETWEEN_SAVES)) {
+            config.set(TIME_BETWEEN_SAVES, 300000); // Default to 5 minutes (300000 milliseconds)
+        }
 	}
 	
 	public static FileConfiguration getConfig() {

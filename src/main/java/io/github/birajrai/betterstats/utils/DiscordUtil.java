@@ -28,11 +28,11 @@ public class DiscordUtil {
 	}
 	
 	public static long getGuildId() {
-		return DataBase.getConfig().getLong("discordGuildId");
+		return DataBase.getConfig().getLong("guildId");
 	}
 	
 	public static long getRoleLinkedId() {
-		return DataBase.getConfig().getLong("discordRoleLinkedId");
+		return DataBase.getConfig().getLong("roleLinkedId");
 	}
 	
 	public static long getChannelId() {
