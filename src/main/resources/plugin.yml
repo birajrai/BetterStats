@@ -2,10 +2,10 @@ name: BetterStats
 version: '1.0-SNAPSHOT'
 main: io.github.birajrai.betterstats.Main
 api-version: '1.21'
-prefix: [ cBans ]
+prefix: [ BetterStats ]
 authors: [ Biraj Rai ]
 description: This plugin uploads to a dataBase the Stats of the players in a Minecraft Server.
-website: yo
+website: https://biraj.is-a.dev/Project/BetterStats
 
 commands:
   upload:
