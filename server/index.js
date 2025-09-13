@@ -12,6 +12,9 @@ mongoose.connect(process.env.MONGO_URI, {
 .then(() => console.log('MongoDB connected'))
 .catch(err => console.error('MongoDB connection error:', err));
 
+// Debugging for Mongoose
+mongoose.set('debug', true);
+
 // Middleware
 app.use(express.json());
 
@@ -42,7 +45,7 @@ const playerStatSchema = new mongoose.Schema({
   link: String,
 });
 
-const PlayerStat = mongoose.model('PlayerStat', playerStatSchema);
+const PlayerStat = mongoose.model('PlayerStat', playerStatSchema, 'players');
 
 // Define a simple schema and model for medals (adjust as per your actual data structure)
 const medalSchema = new mongoose.Schema({
@@ -52,7 +55,7 @@ const medalSchema = new mongoose.Schema({
   // Add other medal properties as needed
 });
 
-const Medal = mongoose.model('Medal', medalSchema);
+const Medal = mongoose.model('Medal', medalSchema, 'medals');
 
 // API Endpoints
 
