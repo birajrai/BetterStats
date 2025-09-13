@@ -30,6 +30,7 @@ import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoCursor;
 import com.mongodb.client.model.Filters;
 import com.mongodb.client.model.Updates;
+import com.mongodb.client.model.UpdateOptions;
 
 /**
  * @author Afonso Batista
@@ -312,10 +313,11 @@ public class DataBaseManager {
 		return DataBase.getConfig();
 	}
 	
-	public void updateOneDiscord(Bson filter, Bson update) {
-		mongoDB.getDiscordCollection().updateOne(filter, update);
-	}
-	
+  	public void updateOneDiscord(Bson filter, Bson update) {
+  		UpdateOptions options = new UpdateOptions().upsert(true);
+  		mongoDB.getDiscordCollection().updateOne(filter, update, options);
+  	}
+
 	public void updateOneServer(Bson filter, Bson update) {
 		mongoDB.getServerCollection().updateOne(filter, update);
 	}

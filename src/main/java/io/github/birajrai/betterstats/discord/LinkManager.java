@@ -21,11 +21,15 @@ import io.github.birajrai.betterstats.commands.DiscordLinkCommand;
 
 import net.dv8tion.jda.api.entities.Guild;
 
+import java.util.logging.Logger;
+
 /**
  * @author Biraj Rai
  * 2025 - 2028
  */
 public class LinkManager {
+	
+	private static final Logger log = Logger.getLogger(LinkManager.class.getName());
 	
 	private DataBaseManager mongoDB;
 	private ServerManager serverMan;
@@ -111,7 +115,9 @@ public class LinkManager {
 		UUID playerId = getPlayer(code);
 
 		mongoDB.updateOneServer(Filters.eq(Stats.PLAYERID.getQuery(), playerId), Updates.set(LINK, userId));
-		mongoDB.updateOneDiscord(Filters.eq("userId", userId), Updates.combine(Updates.set(LINK, playerId), Updates.set("userName", DiscordUtil.getUserById(userId).getName())));
+		String userName = DiscordUtil.getUserById(userId).getName();
+		log.info("Discord user name retrieved: " + userName);
+		mongoDB.updateOneDiscord(Filters.eq("userId", userId), Updates.combine(Updates.set(LINK, playerId), Updates.set("userName", userName)));
 
 		playerLinkCodes.remove(code);
 
