@@ -166,12 +166,12 @@ public class ListenersController {
 		switch(block.getType()) {
 		case REDSTONE:
 		case REDSTONE_BLOCK:
-		case REDSTONE_COMPARATOR:
+		case COMPARATOR:
 		case REDSTONE_WIRE:
 		case REDSTONE_ORE:
-		case REDSTONE_LAMP_OFF:
-		case REDSTONE_TORCH_ON:
-		case REDSTONE_TORCH_OFF:
+		case REDSTONE_LAMP:
+		case REDSTONE_TORCH:
+		case REDSTONE_WALL_TORCH:
 			return true;
 		default:
 			return false;
